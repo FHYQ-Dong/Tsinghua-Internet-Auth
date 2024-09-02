@@ -1,12 +1,12 @@
 import sys
-from selenium import webdriver
+from selenium.webdriver import Chrome
 from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.common.by import By
 from selenium.common import exceptions
 import json, argparse, os, loguru
 from AESCipher import AESCipher
 
-def main(url, username, password):
+def login(url, username, password):
     loguru.logger.debug(f'Start auth: \n- url: {url}')
     options = Options()
     options.add_argument('--headless')
@@ -14,9 +14,8 @@ def main(url, username, password):
     options.add_argument('window-size=1920x1080')
     options.add_argument('--start-maximized')
     options.add_argument('--ignore-certificate-errors')
-    session = webdriver.Edge(options=options)
+    session = Chrome(options=options)
     loguru.logger.debug('Open browser successfully')
-    # 等待页面加载
     try:
         session.implicitly_wait(3)
         session.get(url)
@@ -26,7 +25,6 @@ def main(url, username, password):
         session.find_element(By.ID, "logout")
         loguru.logger.debug('Login successfully')
     except exceptions.NoSuchElementException:
-        loguru.logger.error('Login failed')
         raise Exception('Login failed')
     
 
@@ -48,7 +46,6 @@ def parse_args():
                 os.remove('config.json')
             parser.print_help()
             return {}
-            
     config = {}
     with open('config.json', 'r', encoding='utf-8') as f:
         cipher = AESCipher('Tsinghua-Internet-Auth'.encode('utf-8'))
@@ -57,13 +54,19 @@ def parse_args():
     loguru.logger.debug(f'Loaded config: \n- url: {config["url"]}')
     return config
 
-if __name__ == '__main__':
+
+def main():
     os.chdir(os.path.dirname(os.path.abspath(__file__)))
     config = parse_args()
     if config == {}:
+        os.system('pause')
         sys.exit(0)
     try:
-        main(config['url'], config['username'], config['password'])
+        login(config['url'], config['username'], config['password'])
     except Exception as e:
-        print(e)
+        loguru.logger.error(f'Error: {e}')
         os.system('pause')
+
+
+if __name__ == '__main__':
+    main()

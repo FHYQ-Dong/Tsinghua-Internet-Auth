@@ -13,7 +13,7 @@
 
 ### 直接使用二进制可执行文件
 
-从 [Release页面](https://github.com/FHYQ-Dong/Tsinghua-Internet-Auth/releases) 下载最新版本的压缩包，解压后在命令行中使用：
+从 [Release页面](https://github.com/FHYQ-Dong/Tsinghua-Internet-Auth/releases) 下载最新版本的自解压压缩包，双击解压后在命令行中使用：
 
 ```bash
 # 首次使用
