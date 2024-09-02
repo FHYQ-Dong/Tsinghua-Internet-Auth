@@ -2,7 +2,7 @@
 
 ## 起因
 
-最近疑似清华校园网认证网址 [auth.tsinghua.edu.cn](http://auth.tsinghua.edu.cn) 挂了，转而使用  [tauth.tsinghua.edu.cn](http://tauth.tsinghua.edu.cn) 。但原来的 Windows 认证客户端仍然不能使用，故写了一个小东西用来自动认证校园网。
+最近疑似清华校园网认证网址 [auth4.tsinghua.edu.cn](http://auth4.tsinghua.edu.cn) 挂了，转而使用  [tauth4.tsinghua.edu.cn](http://tauth4.tsinghua.edu.cn) 。但原来的 Windows 认证客户端仍然不能使用，故写了一个小东西用来自动认证校园网。
 
 ## 环境需求
 
@@ -17,7 +17,7 @@
 
 ```bash
 # 首次使用
-./Tsinghua-Internet-Auth -l "http://tauth.tsinghua.edu.cn" -u [your-username] -p [your-password]
+./Tsinghua-Internet-Auth -l "http://login.tsinghua.edu.cn" -u [your-username] -p [your-password]
 
 # 程序会把配置保存到当前目录下 config.json 中，其中包括用户名和密码，虽进行了加密处理，但仍请勿泄露
 # 若当前目录下存在由程序生成的 config.json，程序可以自动加载该配置，而不用从命令行传递参数
@@ -43,7 +43,7 @@
 
    ```bash
    # 首次使用
-   python ./Tsinghua-Internet-Auth.py -l "http://tauth.tsinghua.edu.cn" -u [your-username] -p [your-password]
+   python ./Tsinghua-Internet-Auth.py -l "http://login.tsinghua.edu.cn" -u [your-username] -p [your-password]
 
    # 程序会把配置保存到当前目录下 config.json 中，其中包括用户名和密码，虽进行了加密处理，但仍请勿泄露
    # 若当前目录下存在由程序生成的 config.json，程序可以自动加载该配置，而不用从命令行传递参数
