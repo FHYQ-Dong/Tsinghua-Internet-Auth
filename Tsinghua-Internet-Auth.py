@@ -9,7 +9,7 @@ from AESCipher import AESCipher
 def login(url, username, password):
     loguru.logger.debug(f'Start auth: \n- url: {url}')
     options = Options()
-    options.add_argument('--headless')
+    # options.add_argument('--headless')
     options.add_argument('--disable-gpu')
     options.add_argument('window-size=1920x1080')
     options.add_argument('--start-maximized')
@@ -21,8 +21,12 @@ def login(url, username, password):
         session.get(url)
         session.find_element(By.ID, "username").send_keys(username)
         session.find_element(By.ID, "password").send_keys(password)
-        session.find_element(By.ID, "login-account").click()
-        session.find_element(By.ID, "logout")
+        if "auth4" in session.current_url and not "tauth4" in session.current_url:
+            session.find_element(By.ID, "connect").click()
+            session.find_element(By.ID, "disconnect")
+        else:
+            session.find_element(By.ID, "login-account").click()
+            session.find_element(By.ID, "logout")
         loguru.logger.debug('Login successfully')
     except exceptions.NoSuchElementException:
         raise Exception('Login failed')
